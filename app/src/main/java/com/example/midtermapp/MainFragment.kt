@@ -24,7 +24,7 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
     private var guesses = -1
     private var name = "name"
-    private val args: FragmentMainArgs by navArgs()
+    private val args: MainFragmentArgs by navArgs()
 
 
 
@@ -33,6 +33,10 @@ class MainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            if (args.guesses.toInt() != -1) {
+                guesses = args.guesses.toInt()
+                name = args.playerName
+            }
 
         }
     }
@@ -45,7 +49,11 @@ class MainFragment : Fragment() {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        if ()
+        if (guesses != -1) {
+            var prevPlayerInfo = binding.prevPlayerInfo
+            prevPlayerInfo.visibility = View.VISIBLE
+            prevPlayerInfo.text = "$name score: $guesses"
+        }
 
 
         var highscore_button = binding.highscoreButton
