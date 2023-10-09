@@ -11,6 +11,13 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/prev_player_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:text="" />
+
+        <TextView
             android:id="@+id/welcome_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

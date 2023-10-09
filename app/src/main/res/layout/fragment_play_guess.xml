@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@android:drawable/btn_star" />
+                android:src="@android:drawable/btn_minus" />
 
             <EditText
                 android:id="@+id/guess_edit_text"
@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@android:drawable/btn_star" />
+                android:src="@android:drawable/btn_plus" />
         </LinearLayout>
 
         <Button

@@ -1,13 +1,16 @@
 package com.example.midtermapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.midtermapp.databinding.FragmentMainBinding
 import com.example.midtermapp.databinding.FragmentPlayGuessBinding
+import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,6 +48,33 @@ class PlayGuessFragment : Fragment() {
         _binding = FragmentPlayGuessBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModel = ViewModelProvider(requireActivity()).get(PlayViewModel::class.java)
+
+        val minValue = 1
+        val maxValue = 100
+//        val correctNumber = Random.nextInt(minValue, maxValue + 1) // Add 1 to include the maxValue
+        val correctNumber = 1
+
+        var guessEditText = binding.guessEditText
+        var okButton = binding.okButton
+        okButton.setOnClickListener {
+            viewModel.playerName.value = binding.enterPlayerName.text.toString()
+            if (correctNumber.toString() != guessEditText.text.toString()) {
+                viewModel.guessAttempts.value = viewModel.guessAttempts.value?.toInt()?.plus(1).toString()
+                guessEditText.setText("")
+            }
+            else if (correctNumber.toString() == guessEditText.text.toString()) {
+
+                val action = PlayFragmentDirections.actionPlayFragmentToMainFragment().apply {
+                    playerName = viewModel.playerName.value.toString()
+                    guesses = viewModel.guessAttempts.value.toString()
+                }
+                Log.d("actions","play to main")
+                this.findNavController().navigate(action)
+            }
+        }
+
+
+
         return view
     }
 

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.midtermapp.databinding.FragmentPlayAttemptBinding
 import com.example.midtermapp.databinding.FragmentPlayGuessBinding
@@ -44,6 +45,11 @@ class PlayAttemptFragment : Fragment() {
         _binding = FragmentPlayAttemptBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModel = ViewModelProvider(requireActivity()).get(PlayViewModel::class.java)
+        var attemptNumber = binding.attemptNumber
+
+        viewModel.guessAttempts.observe(viewLifecycleOwner, Observer {
+            attemptNumber.text = viewModel.guessAttempts.value.toString()
+        })
 
         return view
     }

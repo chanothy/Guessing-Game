@@ -5,6 +5,7 @@ plugins {
     id("androidx.navigation.safeargs")
 }
 
+
 android {
     namespace = "com.example.midtermapp"
     compileSdk = 33

@@ -53,6 +53,13 @@
         <action
             android:id="@+id/action_mainFragment_to_playFragment"
             app:destination="@id/playFragment" />
+        <argument android:name="PlayerName"
+            app:argType="string"
+            android:defaultValue='name' />
+        <argument
+            android:name="Guesses"
+            app:argType="string"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/playFragment"

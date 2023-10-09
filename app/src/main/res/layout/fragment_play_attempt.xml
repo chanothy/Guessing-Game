@@ -17,7 +17,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/attempts_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Number of Attempts: "
@@ -25,7 +25,7 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/attempt_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
