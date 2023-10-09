@@ -23,7 +23,7 @@ class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
     private var guesses = -1
-    private var name = "name"
+    private var name = "anonymous"
     private val args: MainFragmentArgs by navArgs()
 
 
@@ -35,9 +35,10 @@ class MainFragment : Fragment() {
         arguments?.let {
             if (args.guesses.toInt() != -1) {
                 guesses = args.guesses.toInt()
+            }
+            if (args.playerName != "anonymous") {
                 name = args.playerName
             }
-
         }
     }
 
@@ -48,11 +49,13 @@ class MainFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val view = binding.root
+        val welcomeTextView = binding.welcomeTextView
 
         if (guesses != -1) {
             var prevPlayerInfo = binding.prevPlayerInfo
             prevPlayerInfo.visibility = View.VISIBLE
             prevPlayerInfo.text = "$name score: $guesses"
+            welcomeTextView.text = "Play another game?"
         }
 
 

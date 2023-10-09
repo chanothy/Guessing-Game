@@ -13,7 +13,8 @@
             android:id="@+id/prev_player_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
+            android:textSize="40dp"
+            android:visibility="gone"
             android:text="" />
 
         <TextView
@@ -23,7 +24,7 @@
             android:gravity="center"
             android:layout_weight="1"
             android:text="Welcome to the Game"
-            android:textSize="50dp" />
+            android:textSize="40dp" />
 
         <Button
             android:id="@+id/play_button"

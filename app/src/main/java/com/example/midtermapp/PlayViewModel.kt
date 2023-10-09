@@ -10,7 +10,7 @@ class PlayViewModel : ViewModel() {
     }
 
     val playerName: MutableLiveData<String> by lazy {
-        MutableLiveData<String>("default")
+        MutableLiveData<String>("anonymous")
     }
 
 }

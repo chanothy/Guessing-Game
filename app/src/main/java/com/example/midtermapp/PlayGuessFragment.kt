@@ -1,11 +1,13 @@
 package com.example.midtermapp
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.midtermapp.databinding.FragmentMainBinding
@@ -48,22 +50,53 @@ class PlayGuessFragment : Fragment() {
         _binding = FragmentPlayGuessBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModel = ViewModelProvider(requireActivity()).get(PlayViewModel::class.java)
+        val plusButton = binding.plusButton
+        val minusButton = binding.minusButton
+        val guessEditText = binding.guessEditText
+        var okButton = binding.okButton
+
 
         val minValue = 1
         val maxValue = 100
-//        val correctNumber = Random.nextInt(minValue, maxValue + 1) // Add 1 to include the maxValue
-        val correctNumber = 1
+        val correctNumber = Random.nextInt(minValue, maxValue + 1) // Add 1 to include the maxValue
+        Log.d("correct number", correctNumber.toString())
 
-        var guessEditText = binding.guessEditText
-        var okButton = binding.okButton
+
+
+        plusButton.setOnClickListener {
+            if (guessEditText.text.toString() != "") {
+                guessEditText.setText(guessEditText.text.toString().toInt().plus(1).toString())
+            }
+        }
+
+        minusButton.setOnClickListener {
+            if (guessEditText.text.toString() != "") {
+                guessEditText.setText(guessEditText.text.toString().toInt().minus(1).toString())
+            }
+        }
+
+
         okButton.setOnClickListener {
             viewModel.playerName.value = binding.enterPlayerName.text.toString()
+            var result: String
+            if (guessEditText.text.toString().toInt() > correctNumber) {
+                result = "higher"
+            }
+            else {
+                result = "lower"
+            }
+
             if (correctNumber.toString() != guessEditText.text.toString()) {
                 viewModel.guessAttempts.value = viewModel.guessAttempts.value?.toInt()?.plus(1).toString()
                 guessEditText.setText("")
+                val text = "Your guess was $result than the answer"
+                val duration = Toast.LENGTH_SHORT
+                Toast.makeText(context, text, duration).show()
+                var mediaPlayer = MediaPlayer.create(context, R.raw.wrong)
+                mediaPlayer.start()
             }
             else if (correctNumber.toString() == guessEditText.text.toString()) {
-
+                viewModel.guessAttempts.value = viewModel.guessAttempts.value?.toInt()?.plus(1).toString()
                 val action = PlayFragmentDirections.actionPlayFragmentToMainFragment().apply {
                     playerName = viewModel.playerName.value.toString()
                     guesses = viewModel.guessAttempts.value.toString()
