@@ -10,7 +10,7 @@ data class Task(
     @PrimaryKey(autoGenerate = true)
     var taskId: Long = 0L,
     @ColumnInfo(name = "task_name")
-    var playerName: String = "",
+    var taskName: String = "",
     @ColumnInfo(name = "description")
-    var playerGuesses: String = ""
+    var description: String = ""
 )

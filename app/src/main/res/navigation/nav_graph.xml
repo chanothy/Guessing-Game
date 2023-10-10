@@ -70,4 +70,13 @@
             android:id="@+id/action_playFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/playGuessFragment"
+        android:name="com.example.midtermapp.PlayGuessFragment"
+        android:label="fragment_play_guess"
+        tools:layout="@layout/fragment_play_guess" >
+        <action
+            android:id="@+id/action_playGuessFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

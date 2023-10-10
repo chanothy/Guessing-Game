@@ -44,7 +44,11 @@ class PlayAttemptFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentPlayAttemptBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModel = ViewModelProvider(requireActivity()).get(PlayViewModel::class.java)
+//        viewModel = ViewModelProvider(requireActivity()).get(PlayViewModel::class.java)
+        val application = requireNotNull(this.activity).application
+        val dao = TaskDatabase.getInstance(application).taskDao
+        val viewModelFactory = PlayViewModelFactory(dao)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(PlayViewModel::class.java)
         var attemptNumber = binding.attemptNumber
 
         viewModel.guessAttempts.observe(viewLifecycleOwner, Observer {
@@ -72,5 +76,10 @@ class PlayAttemptFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

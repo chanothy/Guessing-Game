@@ -39,10 +39,10 @@ class TasksFragment : Fragment()   {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-       /* val adapter = TaskItemAdapter{ taskId ->
-            viewModel.onTaskClicked(taskId)
+        /* val adapter = TaskItemAdapter{ taskId ->
+             viewModel.onTaskClicked(taskId)
 
-        }*/
+         }*/
 
 
 
@@ -61,7 +61,7 @@ class TasksFragment : Fragment()   {
             Log.d(TAG, "in yesPressed(): taskId = $taskId")
         }
         fun deleteClicked (taskId : Long) {
-             ConfirmDeleteDialogFragment(taskId,::yesPressed).show(childFragmentManager, ConfirmDeleteDialogFragment.TAG)
+            ConfirmDeleteDialogFragment(taskId,::yesPressed).show(childFragmentManager, ConfirmDeleteDialogFragment.TAG)
         }
         val adapter = TaskItemAdapter(::taskClicked,::deleteClicked)
 

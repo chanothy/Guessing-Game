@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.midtermapp.databinding.FragmentMainBinding
 import com.example.midtermapp.databinding.FragmentPlayGuessBinding
 import kotlin.random.Random
 
@@ -47,9 +46,19 @@ class PlayGuessFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+
+
         _binding = FragmentPlayGuessBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModel = ViewModelProvider(requireActivity()).get(PlayViewModel::class.java)
+//        viewModel = ViewModelProvider(requireActivity()).get(PlayViewModel::class.java)
+        val application = requireNotNull(this.activity).application
+        val dao = TaskDatabase.getInstance(application).taskDao
+        val viewModelFactory = PlayViewModelFactory(dao)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(PlayViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         val plusButton = binding.plusButton
         val minusButton = binding.minusButton
         val guessEditText = binding.guessEditText
@@ -58,7 +67,8 @@ class PlayGuessFragment : Fragment() {
 
         val minValue = 1
         val maxValue = 100
-        val correctNumber = Random.nextInt(minValue, maxValue + 1) // Add 1 to include the maxValue
+//        val correctNumber = Random.nextInt(minValue, maxValue + 1)
+        val correctNumber = 1
         Log.d("correct number", correctNumber.toString())
 
 
@@ -102,6 +112,7 @@ class PlayGuessFragment : Fragment() {
                     guesses = viewModel.guessAttempts.value.toString()
                 }
                 Log.d("actions","play to main")
+                viewModel.addTask()
                 this.findNavController().navigate(action)
             }
         }
@@ -129,5 +140,10 @@ class PlayGuessFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
