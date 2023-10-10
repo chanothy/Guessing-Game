@@ -33,6 +33,7 @@ class PlayGuessFragment : Fragment() {
 
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -51,13 +52,16 @@ class PlayGuessFragment : Fragment() {
 
         _binding = FragmentPlayGuessBinding.inflate(inflater, container, false)
         val view = binding.root
-//        viewModel = ViewModelProvider(requireActivity()).get(PlayViewModel::class.java)
-        val application = requireNotNull(this.activity).application
-        val dao = TaskDatabase.getInstance(application).taskDao
-        val viewModelFactory = PlayViewModelFactory(dao)
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(PlayViewModel::class.java)
+//        val application = requireNotNull(this.activity).application
+//        val dao = TaskDatabase.getInstance(application).taskDao
+//        val viewModelFactory = PlayViewModelFactory(dao)
+//        val viewModel = ViewModelProvider(this, viewModelFactory).get(PlayViewModel::class.java)
+        val activity = requireActivity() as MainActivity
+        viewModel = activity.sharedViewModel
+        viewModel.guessAttempts.value = "0"
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
 
         val plusButton = binding.plusButton
         val minusButton = binding.minusButton
@@ -70,8 +74,6 @@ class PlayGuessFragment : Fragment() {
 //        val correctNumber = Random.nextInt(minValue, maxValue + 1)
         val correctNumber = 1
         Log.d("correct number", correctNumber.toString())
-
-
 
         plusButton.setOnClickListener {
             if (guessEditText.text.toString() != "") {
@@ -89,7 +91,7 @@ class PlayGuessFragment : Fragment() {
         okButton.setOnClickListener {
             viewModel.playerName.value = binding.enterPlayerName.text.toString()
             var result: String
-            if (guessEditText.text.toString().toInt() > correctNumber) {
+            if (guessEditText.text.toString() != "" && guessEditText.text.toString().toInt() > correctNumber) {
                 result = "higher"
             }
             else {
@@ -98,6 +100,7 @@ class PlayGuessFragment : Fragment() {
 
             if (correctNumber.toString() != guessEditText.text.toString()) {
                 viewModel.guessAttempts.value = viewModel.guessAttempts.value?.toInt()?.plus(1).toString()
+                Log.d("guess attempts", viewModel.guessAttempts.value.toString())
                 guessEditText.setText("")
                 val text = "Your guess was $result than the answer"
                 val duration = Toast.LENGTH_SHORT
@@ -117,29 +120,11 @@ class PlayGuessFragment : Fragment() {
             }
         }
 
-
-
         return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PlayGuessFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PlayGuessFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    fun getSharedViewModel(): PlayViewModel {
+        return viewModel
     }
 
     override fun onDestroyView() {

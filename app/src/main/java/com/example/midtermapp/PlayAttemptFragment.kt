@@ -1,6 +1,7 @@
 package com.example.midtermapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +27,7 @@ class PlayAttemptFragment : Fragment() {
     private var param2: String? = null
     private var _binding: FragmentPlayAttemptBinding? = null
     private val binding get() = _binding!!
-    lateinit var viewModel: PlayViewModel
+    private lateinit var viewModel: PlayViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,15 +45,18 @@ class PlayAttemptFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentPlayAttemptBinding.inflate(inflater, container, false)
         val view = binding.root
-//        viewModel = ViewModelProvider(requireActivity()).get(PlayViewModel::class.java)
-        val application = requireNotNull(this.activity).application
-        val dao = TaskDatabase.getInstance(application).taskDao
-        val viewModelFactory = PlayViewModelFactory(dao)
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(PlayViewModel::class.java)
+//        val application = requireNotNull(this.activity).application
+//        val dao = TaskDatabase.getInstance(application).taskDao
+//        val viewModelFactory = PlayViewModelFactory(dao)
+//        val viewModel = ViewModelProvider(this, viewModelFactory).get(PlayViewModel::class.java)
+        val activity = requireActivity() as MainActivity
+        viewModel = activity.sharedViewModel
+
         var attemptNumber = binding.attemptNumber
 
         viewModel.guessAttempts.observe(viewLifecycleOwner, Observer {
             attemptNumber.text = viewModel.guessAttempts.value.toString()
+            Log.d("Play Attempt Fragment",viewModel.guessAttempts.value.toString())
         })
 
         return view

@@ -7,9 +7,6 @@
             name="task"
             type="com.example.midtermapp.Task"
             />
-        <variable
-            name="viewModel"
-            type="com.example.midtermapp.EditTaskViewModel" />
     </data>
 
     <LinearLayout

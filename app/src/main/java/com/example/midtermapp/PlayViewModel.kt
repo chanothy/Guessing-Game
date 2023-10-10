@@ -17,11 +17,15 @@ import kotlin.coroutines.resume
 class PlayViewModel(val dao: TaskDao) : ViewModel() {
 
     val guessAttempts: MutableLiveData<String> by lazy {
-        MutableLiveData<String>("0")
+        MutableLiveData<String>()
     }
 
     val playerName: MutableLiveData<String> by lazy {
         MutableLiveData<String>("anonymous")
+    }
+
+    init {
+        guessAttempts.value = "0"
     }
 
     fun addTask() {

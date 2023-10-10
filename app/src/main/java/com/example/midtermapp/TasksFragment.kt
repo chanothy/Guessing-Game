@@ -73,14 +73,6 @@ class TasksFragment : Fragment()   {
             }
         })
 
-        viewModel.navigateToTask.observe(viewLifecycleOwner, Observer { taskId ->
-            taskId?.let {
-                val action = TasksFragmentDirections
-                    .actionTasksFragmentToEditTaskFragment(taskId)
-                this.findNavController().navigate(action)
-                viewModel.onTaskNavigated()
-            }
-        })
 
         return view
     }
