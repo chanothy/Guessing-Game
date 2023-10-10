@@ -29,6 +29,14 @@
 <!--            android:onClick="@{() -> viewModel.addTask()}" />-->
 
 
+        <TextView
+            android:id="@+id/no_scores_notice"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textSize="30dp"
+            android:layout_weight="1"
+            android:visibility="visible"
+            android:text="No high scores yet." />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasks_list"

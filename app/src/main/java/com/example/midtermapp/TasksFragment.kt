@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -38,6 +39,19 @@ class TasksFragment : Fragment()   {
             this, viewModelFactory).get(TasksViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        val noScoresNotice = binding.noScoresNotice
+
+        val rowCountLiveData: LiveData<Int> = dao.getRowCount()
+
+        rowCountLiveData.observe(viewLifecycleOwner) { rowCount ->
+            if (rowCount > 0) {
+                noScoresNotice.visibility = View.GONE
+            }
+            else {
+                noScoresNotice.visibility = View.VISIBLE
+            }
+        }
+
 
         fun taskClicked (taskId : Long) {
             viewModel.onTaskClicked(taskId)

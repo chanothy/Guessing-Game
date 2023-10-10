@@ -22,4 +22,8 @@ interface TaskDao {
     fun get(key: Long): LiveData<Task>
     @Query("SELECT * FROM task_table ORDER BY taskId DESC")
     fun getAll(): LiveData<List<Task>>
+
+    @Query("SELECT COUNT(*) FROM task_table")
+    fun getRowCount(): LiveData<Int>
+
 }
