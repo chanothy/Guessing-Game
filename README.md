@@ -39,6 +39,7 @@ GIFs created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 
 Describe any challenges encountered while building the app.
+One of the challenges was getting all the generated boilerplate code from the safe args, Dao, etc to work. Sometimes the gradle configuration was an issue and sometimes the XML had to be configured very specifically for the boilerplate to work. Another problem I had was getting both Play fragments to work with the same viewModel. It was easy to do with the non-Dao version of the viewModel, using a Dao made it generate a new viewModel each time, so I had to figure out how to force both of them to use the same generated viewMode.
 
 ## License
 
