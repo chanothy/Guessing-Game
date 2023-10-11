@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.midtermapp.Task
-import com.example.midtermapp.TaskDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -34,12 +32,12 @@ suspend fun <T> LiveData<T>.await(): T {
         }
     }
 }
-class TasksViewModel(val dao: TaskDao) : ViewModel() {
+class TasksViewModel(val dao: ScoreDao) : ViewModel() {
     /**
      * Contains methods of adding and removing tasks.
      */
     var newTaskName = ""
-    var newDescription = ""
+    var newDescription = 0
     val tasks = dao.getAll()
     private val _navigateToTask = MutableLiveData<Long?>()
     val navigateToTask: LiveData<Long?>

@@ -6,30 +6,14 @@
     app:startDestination="@id/mainFragment">
     <fragment
         android:id="@+id/tasksFragment"
-        android:name="com.example.midtermapp.TasksFragment"
+        android:name="com.example.midtermapp.ScoreFragment"
         android:label="fragment_tasks"
-        tools:layout="@layout/fragment_tasks" >
-        <action
-            android:id="@+id/action_tasksFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/noteFragment"
-        android:name="com.example.midtermapp.NoteFragment"
-        android:label="fragment_note"
-        tools:layout="@layout/fragment_note" >
-        <action
-            android:id="@+id/action_noteFragment_to_tasksFragment"
-            app:destination="@id/tasksFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_tasks" />
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.midtermapp.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_mainFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
         <action
             android:id="@+id/action_mainFragment_to_tasksFragment"
             app:destination="@id/tasksFragment" />

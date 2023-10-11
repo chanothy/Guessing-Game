@@ -11,7 +11,7 @@ import androidx.room.Update
  * Functions for the database
  */
 @Dao
-interface TaskDao {
+interface ScoreDao {
     @Insert
     suspend fun insert(task: Task)
     @Update

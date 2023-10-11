@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 /**
  * factory for generating TasksViewModels
  */
-class TasksViewModelFactory(private val dao: TaskDao)
+class ScoreViewModelFactory(private val dao: ScoreDao)
     : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

@@ -10,9 +10,9 @@ import com.example.midtermapp.databinding.TaskItemBinding
  * communicates between database and viewModel
  */
 
-class TaskItemAdapter(val clickListener: (taskId: Long) -> Unit,
-                      val deleteClickListener: (taskId: Long) -> Unit)
-    : ListAdapter<Task, TaskItemAdapter.TaskItemViewHolder>(TaskDiffItemCallback()) {
+class ScoreItemAdapter(val clickListener: (taskId: Long) -> Unit,
+                       val deleteClickListener: (taskId: Long) -> Unit)
+    : ListAdapter<Task, ScoreItemAdapter.TaskItemViewHolder>(ScoreDiffItemCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : TaskItemViewHolder = TaskItemViewHolder.inflateFrom(parent)
     override fun onBindViewHolder(holder: TaskItemViewHolder, position: Int) {

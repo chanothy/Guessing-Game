@@ -46,7 +46,7 @@ class PlayAttemptFragment : Fragment() {
         _binding = FragmentPlayAttemptBinding.inflate(inflater, container, false)
         val view = binding.root
 //        val application = requireNotNull(this.activity).application
-//        val dao = TaskDatabase.getInstance(application).taskDao
+//        val dao = ScoreDatabase.getInstance(application).scoreDao
 //        val viewModelFactory = PlayViewModelFactory(dao)
 //        val viewModel = ViewModelProvider(this, viewModelFactory).get(PlayViewModel::class.java)
         val activity = requireActivity() as MainActivity

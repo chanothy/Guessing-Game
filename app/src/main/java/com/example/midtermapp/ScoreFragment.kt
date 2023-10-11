@@ -9,22 +9,21 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.midtermapp.databinding.FragmentTasksBinding
 
 
 /**
  * A simple [Fragment] subclass.
- * Use the [TasksFragment.newInstance] factory method to
+ * Use the [ScoreFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class TasksFragment : Fragment()   {
+class ScoreFragment : Fragment()   {
     /**
      * Serves as home screen
      *
      * Has a recycler view that shows all the note items. Also allows for creation of new notes.
      */
-    val TAG = "TasksFragment"
+    val TAG = "ScoreFragment"
     private var _binding: FragmentTasksBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
@@ -33,8 +32,8 @@ class TasksFragment : Fragment()   {
         _binding = FragmentTasksBinding.inflate(inflater, container, false)
         val view = binding.root
         val application = requireNotNull(this.activity).application
-        val dao = TaskDatabase.getInstance(application).taskDao
-        val viewModelFactory = TasksViewModelFactory(dao)
+        val dao = ScoreDatabase.getInstance(application).scoreDao
+        val viewModelFactory = ScoreViewModelFactory(dao)
         val viewModel = ViewModelProvider(
             this, viewModelFactory).get(TasksViewModel::class.java)
         binding.viewModel = viewModel
@@ -62,7 +61,7 @@ class TasksFragment : Fragment()   {
         fun deleteClicked (taskId : Long) {
             ConfirmDeleteDialogFragment(taskId,::yesPressed).show(childFragmentManager, ConfirmDeleteDialogFragment.TAG)
         }
-        val adapter = TaskItemAdapter(::taskClicked,::deleteClicked)
+        val adapter = ScoreItemAdapter(::taskClicked,::deleteClicked)
 
 
         binding.tasksList.adapter = adapter

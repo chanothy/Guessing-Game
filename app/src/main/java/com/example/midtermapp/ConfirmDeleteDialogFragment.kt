@@ -7,9 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class ConfirmDeleteDialogFragment(val taskId : Long,val clickListener: (taskId: Long) -> Unit) : DialogFragment() {
     /**
@@ -41,8 +38,8 @@ class ConfirmDeleteDialogFragment(val taskId : Long,val clickListener: (taskId: 
             .setMessage(getString(R.string.delete_confirmation))
             .setPositiveButton(getString(R.string.yes)) { _,_ -> clickListener(taskId)
                 val application = requireNotNull(this.activity).application
-                val dao = TaskDatabase.getInstance(application).taskDao
-                val viewModelFactory = TasksViewModelFactory(dao)
+                val dao = ScoreDatabase.getInstance(application).scoreDao
+                val viewModelFactory = ScoreViewModelFactory(dao)
                 val viewModel = ViewModelProvider(this, viewModelFactory)[TasksViewModel::class.java]
                 viewModel.deleteNote(taskId)
 

@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val application = requireNotNull(this).application
-        val dao = TaskDatabase.getInstance(application).taskDao
+        val dao = ScoreDatabase.getInstance(application).scoreDao
         val viewModelFactory = PlayViewModelFactory(dao)
         sharedViewModel = ViewModelProvider(this, viewModelFactory).get(PlayViewModel::class.java)
 
