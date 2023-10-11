@@ -42,7 +42,7 @@
 
         <TextView
             android:id="@+id/instruction"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="25dp"
@@ -59,7 +59,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@android:drawable/btn_minus" />
+                android:background="@android:color/transparent"
+                android:src="@drawable/minus" />
 
             <EditText
                 android:id="@+id/guess_edit_text"
@@ -75,13 +76,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@android:drawable/btn_plus" />
+                android:background="@android:color/transparent"
+                android:src="@drawable/plus" />
         </LinearLayout>
 
         <Button
             android:id="@+id/ok_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cornerRadius="0dp"
             android:text="OK" />
 
     </LinearLayout>

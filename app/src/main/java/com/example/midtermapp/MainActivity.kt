@@ -10,6 +10,7 @@ class MainActivity : AppCompatActivity() {
      * Main Activity
      *
      * Serves as placeholder for navHost
+     * Contains the shared viewModel for the [Play] fragments
      *
      * @author Timothy Chan
      */

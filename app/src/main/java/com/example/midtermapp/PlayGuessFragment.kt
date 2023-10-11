@@ -52,10 +52,6 @@ class PlayGuessFragment : Fragment() {
 
         _binding = FragmentPlayGuessBinding.inflate(inflater, container, false)
         val view = binding.root
-//        val application = requireNotNull(this.activity).application
-//        val dao = TaskDatabase.getInstance(application).taskDao
-//        val viewModelFactory = PlayViewModelFactory(dao)
-//        val viewModel = ViewModelProvider(this, viewModelFactory).get(PlayViewModel::class.java)
         val activity = requireActivity() as MainActivity
         viewModel = activity.sharedViewModel
         viewModel.guessAttempts.value = "0"
@@ -71,8 +67,7 @@ class PlayGuessFragment : Fragment() {
 
         val minValue = 1
         val maxValue = 100
-//        val correctNumber = Random.nextInt(minValue, maxValue + 1)
-        val correctNumber = 1
+        val correctNumber = Random.nextInt(minValue, maxValue + 1)
         Log.d("correct number", correctNumber.toString())
 
         plusButton.setOnClickListener {

@@ -20,9 +20,8 @@ interface TaskDao {
     suspend fun delete(task: Task)
     @Query("SELECT * FROM task_table WHERE taskId = :key")
     fun get(key: Long): LiveData<Task>
-    @Query("SELECT * FROM task_table ORDER BY taskId DESC")
+    @Query("SELECT * FROM task_table ORDER BY description ASC")
     fun getAll(): LiveData<List<Task>>
-
     @Query("SELECT COUNT(*) FROM task_table")
     fun getRowCount(): LiveData<Int>
 
