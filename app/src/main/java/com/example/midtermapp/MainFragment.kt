@@ -13,12 +13,15 @@ import com.example.midtermapp.databinding.FragmentMainBinding
 
 
 /**
- * A simple [Fragment] subclass.
- * Use the [MainFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Main fragment contains the starting page for the game
+ *
+ * Contains two buttons: Play and High Score that sends you to their fragments
+ * Contains safe args from the play fragments to populate the [prevPlayerInfo] field when a game
+ * has been played. Also updates the [welcomeTextView] after a game has been played.
+ *
+ * @author Timothy Chan
  */
 class MainFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     val TAG = "MainFragment"
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -26,13 +29,11 @@ class MainFragment : Fragment() {
     private var name = "anonymous"
     private val args: MainFragmentArgs by navArgs()
 
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+
+            // safe args are here
             if (args.guesses.toInt() != -1) {
                 guesses = args.guesses.toInt()
             }
@@ -51,6 +52,10 @@ class MainFragment : Fragment() {
         val view = binding.root
         val welcomeTextView = binding.welcomeTextView
 
+        /*
+         * If prior game has been played, the safe args will make it so guesses
+         * is no longer 1. Which allows this to trigger
+         */
         if (guesses != -1) {
             var prevPlayerInfo = binding.prevPlayerInfo
             prevPlayerInfo.visibility = View.VISIBLE
@@ -59,6 +64,7 @@ class MainFragment : Fragment() {
         }
 
 
+        //These two send you to their fragments
         var highscore_button = binding.highscoreButton
         highscore_button.setOnClickListener {
             val action = MainFragmentDirections.actionMainFragmentToTasksFragment()

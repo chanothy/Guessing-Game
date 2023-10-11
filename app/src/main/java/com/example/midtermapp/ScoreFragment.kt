@@ -13,16 +13,11 @@ import com.example.midtermapp.databinding.FragmentTasksBinding
 
 
 /**
- * A simple [Fragment] subclass.
- * Use the [ScoreFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * High Score Screen
+ *
+ * Has a recycler view that shows all the score items.
  */
 class ScoreFragment : Fragment()   {
-    /**
-     * Serves as home screen
-     *
-     * Has a recycler view that shows all the note items. Also allows for creation of new notes.
-     */
     val TAG = "ScoreFragment"
     private var _binding: FragmentTasksBinding? = null
     private val binding get() = _binding!!
@@ -40,8 +35,8 @@ class ScoreFragment : Fragment()   {
         binding.lifecycleOwner = viewLifecycleOwner
         val noScoresNotice = binding.noScoresNotice
 
+        // if there are no items, then show message, else don't
         val rowCountLiveData: LiveData<Int> = dao.getRowCount()
-
         rowCountLiveData.observe(viewLifecycleOwner) { rowCount ->
             if (rowCount > 0) {
                 noScoresNotice.visibility = View.GONE
@@ -71,7 +66,6 @@ class ScoreFragment : Fragment()   {
                 adapter.submitList(it)
             }
         })
-
 
         return view
     }

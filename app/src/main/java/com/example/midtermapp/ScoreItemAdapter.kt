@@ -7,12 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.midtermapp.databinding.TaskItemBinding
 
 /**
- * communicates between database and viewModel
+ * communicates between database and viewModel so that the [ScoreFragment] can show
+ * the scores in the recycler view
+ *
  */
 
 class ScoreItemAdapter(val clickListener: (taskId: Long) -> Unit,
                        val deleteClickListener: (taskId: Long) -> Unit)
-    : ListAdapter<Task, ScoreItemAdapter.TaskItemViewHolder>(ScoreDiffItemCallback()) {
+    : ListAdapter<Score, ScoreItemAdapter.TaskItemViewHolder>(ScoreDiffItemCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : TaskItemViewHolder = TaskItemViewHolder.inflateFrom(parent)
     override fun onBindViewHolder(holder: TaskItemViewHolder, position: Int) {
@@ -31,9 +33,9 @@ class ScoreItemAdapter(val clickListener: (taskId: Long) -> Unit,
             }
         }
 
-        fun bind(item: Task, clickListener: (taskId: Long) -> Unit,
+        fun bind(item: Score, clickListener: (taskId: Long) -> Unit,
                  deleteClickListener: (taskId: Long) -> Unit) {
-            binding.task = item
+            binding.score = item
             binding.root.setOnClickListener { clickListener(item.taskId) }
             binding.deleteButton.setOnClickListener { deleteClickListener(item.taskId) }
         }

@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 /**
  * Implementation of the database
  */
-@Database(entities = [Task::class], version = 3, exportSchema = false)
+@Database(entities = [Score::class], version = 3, exportSchema = false)
 abstract class ScoreDatabase : RoomDatabase() {
     abstract val scoreDao: ScoreDao
     companion object {

@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 
 /**
- * Viewmodel for tasks view
+ * Viewmodel for score view
  *
  * await function waits for data to exist before continuing on with a function call.
  */
@@ -33,23 +33,10 @@ suspend fun <T> LiveData<T>.await(): T {
     }
 }
 class TasksViewModel(val dao: ScoreDao) : ViewModel() {
-    /**
-     * Contains methods of adding and removing tasks.
-     */
-    var newTaskName = ""
-    var newDescription = 0
+    // allows for deletion of notes
     val tasks = dao.getAll()
     private val _navigateToTask = MutableLiveData<Long?>()
-    val navigateToTask: LiveData<Long?>
-        get() = _navigateToTask
-    fun addTask() {
-        viewModelScope.launch {
-            val task = Task()
-            task.taskName = newTaskName
-            task.description = newDescription
-            dao.insert(task)
-        }
-    }
+
     fun onTaskClicked(taskId: Long) {
         _navigateToTask.value = taskId
     }

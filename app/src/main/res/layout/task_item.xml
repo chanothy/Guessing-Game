@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="task"
-            type="com.example.midtermapp.Task"
+            name="score"
+            type="com.example.midtermapp.Score"
             />
     </data>
 
@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:textSize="30dp"
-                    android:text='@{task.taskName + " score: " + task.description}'
+                    android:text='@{score.taskName + " score: " + score.description}'
                     />
 
                 <TextView

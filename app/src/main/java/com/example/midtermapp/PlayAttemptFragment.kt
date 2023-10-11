@@ -11,32 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.midtermapp.databinding.FragmentPlayAttemptBinding
 import com.example.midtermapp.databinding.FragmentPlayGuessBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 /**
- * A simple [Fragment] subclass.
- * Use the [PlayAttemptFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Play attempt fragment is where the amount of attempts are shown to the player
  */
 class PlayAttemptFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
     private var _binding: FragmentPlayAttemptBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: PlayViewModel
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,41 +27,18 @@ class PlayAttemptFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentPlayAttemptBinding.inflate(inflater, container, false)
         val view = binding.root
-//        val application = requireNotNull(this.activity).application
-//        val dao = ScoreDatabase.getInstance(application).scoreDao
-//        val viewModelFactory = PlayViewModelFactory(dao)
-//        val viewModel = ViewModelProvider(this, viewModelFactory).get(PlayViewModel::class.java)
         val activity = requireActivity() as MainActivity
         viewModel = activity.sharedViewModel
 
         var attemptNumber = binding.attemptNumber
 
+        // This observes the attempt number in the viewModel and updates reactively
         viewModel.guessAttempts.observe(viewLifecycleOwner, Observer {
             attemptNumber.text = viewModel.guessAttempts.value.toString()
             Log.d("Play Attempt Fragment",viewModel.guessAttempts.value.toString())
         })
 
         return view
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PlayAttemptFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PlayAttemptFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 
     override fun onDestroyView() {

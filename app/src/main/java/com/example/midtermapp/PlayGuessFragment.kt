@@ -13,10 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.midtermapp.databinding.FragmentPlayGuessBinding
 import kotlin.random.Random
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+
 
 /**
  * A simple [Fragment] subclass.
@@ -32,24 +29,11 @@ class PlayGuessFragment : Fragment() {
     lateinit var viewModel: PlayViewModel
 
 
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
-
-
         _binding = FragmentPlayGuessBinding.inflate(inflater, container, false)
         val view = binding.root
         val activity = requireActivity() as MainActivity
@@ -64,12 +48,13 @@ class PlayGuessFragment : Fragment() {
         val guessEditText = binding.guessEditText
         var okButton = binding.okButton
 
-
+        // random number generator
         val minValue = 1
         val maxValue = 100
         val correctNumber = Random.nextInt(minValue, maxValue + 1)
         Log.d("correct number", correctNumber.toString())
 
+        // click buttons
         plusButton.setOnClickListener {
             if (guessEditText.text.toString() != "") {
                 guessEditText.setText(guessEditText.text.toString().toInt().plus(1).toString())
@@ -82,7 +67,7 @@ class PlayGuessFragment : Fragment() {
             }
         }
 
-
+        // toast and noise cue code
         okButton.setOnClickListener {
             viewModel.playerName.value = binding.enterPlayerName.text.toString()
             var result: String
@@ -92,7 +77,10 @@ class PlayGuessFragment : Fragment() {
             else {
                 result = "lower"
             }
-
+            /*
+            if wrong answer, else if correct answer
+            Code will iterate the guess attempts in the viewModel here
+             */
             if (correctNumber.toString() != guessEditText.text.toString()) {
                 viewModel.guessAttempts.value = viewModel.guessAttempts.value?.toInt()?.plus(1).toString()
                 Log.d("guess attempts", viewModel.guessAttempts.value.toString())
@@ -116,10 +104,6 @@ class PlayGuessFragment : Fragment() {
         }
 
         return view
-    }
-
-    fun getSharedViewModel(): PlayViewModel {
-        return viewModel
     }
 
     override fun onDestroyView() {

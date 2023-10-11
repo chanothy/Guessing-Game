@@ -4,9 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Schema for the scores item
+ */
 
 @Entity(tableName = "task_table")
-data class Task(
+data class Score(
     @PrimaryKey(autoGenerate = true)
     var taskId: Long = 0L,
     @ColumnInfo(name = "task_name")

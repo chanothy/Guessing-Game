@@ -8,20 +8,20 @@ import androidx.room.Query
 import androidx.room.Update
 
 /**
- * Functions for the database
+ * Functions for the score database
  */
 @Dao
 interface ScoreDao {
     @Insert
-    suspend fun insert(task: Task)
+    suspend fun insert(score: Score)
     @Update
-    suspend fun update(task: Task)
+    suspend fun update(score: Score)
     @Delete
-    suspend fun delete(task: Task)
+    suspend fun delete(score: Score)
     @Query("SELECT * FROM task_table WHERE taskId = :key")
-    fun get(key: Long): LiveData<Task>
+    fun get(key: Long): LiveData<Score>
     @Query("SELECT * FROM task_table ORDER BY description ASC")
-    fun getAll(): LiveData<List<Task>>
+    fun getAll(): LiveData<List<Score>>
     @Query("SELECT COUNT(*) FROM task_table")
     fun getRowCount(): LiveData<Int>
 
