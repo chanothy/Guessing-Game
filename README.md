@@ -29,9 +29,12 @@ The following **extensions** are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='walkthrough.gif' title='Video Walkthrough' width='50%' alt='Video Walkthrough' />
+<img src='https://github.com/chanothy/NotesApp/blob/master/midtermAppDemo.gif' title='Video Walkthrough' width='50%' alt='Video Walkthrough' />
 
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
+<img src='https://github.com/chanothy/NotesApp/blob/master/midtermAppDemoHorizontal.gif' title='Video Walkthrough' width='50%' alt='Video Walkthrough' />
+
+
+GIFs created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
