@@ -31,8 +31,6 @@ Here's a walkthrough of implemented user stories:
 
 <img src='https://github.com/chanothy/MidtermApp/blob/master/midtermAppDemo.gif' title='Video Walkthrough' width='50%' alt='Video Walkthrough' />
 
-<img src='https://github.com/chanothy/MidtermApp/blob/master/midtermAppDemoHorizontal.gif' title='Video Walkthrough' width='50%' alt='Video Walkthrough' />
-
 
 GIFs created with [LiceCap](http://www.cockos.com/licecap/).
 
